@@ -1,144 +1,115 @@
-// 1) გაამრავლე თითოეული ელემენტი 3-ზე.
-// Input: [1,2,3] - Output: [3,6,9]
+//  1) გაქვს ლეპტოპების მასივი, იპოვე ყველაზე ძვირი და გამოიტანე კონსოლში
 
-let arr = [1, 2, 3];
-let newArr = arr.map((item) => item * 3);
-console.log(newArr);
-
-
-
-// 2)გაფილტრე ისეთი რიცხვები რომლებიც იყოფა უნაშთოდ 3-ზე
-
-let arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-let filteredArr = arr2.filter((x) => x % 3 === 0);
-console.log(filteredArr);
-
-// 3)დააბრუნე ყველა დადებითი რიცხვის ჯამი
-
-let arr3 = [1, -2, 3, 4, -5, 6, -7, 8, 9];
-let positiveSum = arr3
-    .filter((x) => x > 0)
-    .reduce((acc, curr) => acc + curr, 0);
-console.log(positiveSum);
-
-
-// 4)მოცემული სტრინგების მასივიდან წაშალე თითოეული სტრინგის ბოლო სიმბოლო
-// let namesArr = ["giorgi","nika","mariami"]
-let namesArr = ["giorgi", "nika", "mariami"];
-let modifiedNames = namesArr.map((name) => name.slice(0, -1));
-console.log(modifiedNames);
-
-
-
-// 5)გაამრავლე ყველა ელემენტი მასივში 2-ზე და შემდეგ ამოიღე რიცხვები, რომლებიც იყოფა 3-ზე
-let numsArr = [1, -1, -2, -10, 111, 3, 2, 5];
-let processedArr = numsArr
-    .map((num) => num * 2)
-    .filter((num) => num % 3 === 0);
-console.log(processedArr);
-
-
-
-
-// 6)გაქვთ მასივი - let arr = [
-//     {
-//         category:"pizza",
-//         price:20
-//     },
-//     {
-//         category:"pizza",
-//         price:20
-//     },
-//     {
-//         category:"sushi",
-//         price:30
-//     },
-//     {
-//         category:"sushi",
-//         price:30
-//     },
-// ]
-
-// თქვენი მიზანია  დააჯგუფოთ შემდეგნაირად - {
-//   '20': [
-//     { category: 'pizza', price: 20 },
-//     { category: 'pizza', price: 20 }
-//   ],
-//   '30': [
-//     { category: 'sushi', price: 30 },
-//     { category: 'sushi', price: 30 }
-//   ]
-// }
-let items = [
-    {
-        category: "pizza",
-        price: 20,
-    },
-    {
-        category: "pizza",
-        price: 20,
-    },
-    {
-        category: "sushi",
-        price: 30,
-    },
-    {
-
-        category: "sushi",
-        price: 30,
-    },
+const laptops = [
+    { model: "Dell XPS 13", price: 1800 },
+    { model: "MacBook Pro 14", price: 2499 },
+    { model: "Lenovo ThinkPad X1", price: 2100 },
+    { model: "Asus Zephyrus G14", price: 1999 },
 ];
-let groupedItems = items.reduce((acc, item) => {
-    if (!acc[item.price]) {
-        acc[item.price] = [];
+let mostExpensiveLaptop = laptops[0];
+
+for (let i = 1; i < laptops.length; i++) {
+    if (laptops[i].price > mostExpensiveLaptop.price) {
+        mostExpensiveLaptop = laptops[i];
     }
-    acc[item.price].push(item);
-    return acc;
-}, {});
-console.log(groupedItems);
+}
+console.log("Most expensive laptop:", mostExpensiveLaptop);
 
 
 
-
-// 7) დაალაგე რიცხვები ზრდადობით let numsArr = [1,-1,-2,-10,111,3,2,5]
-
-let numsArr1 = [1, -1, -2, -10, 111, 3, 2, 5]
-let sortedArr = numsArr1.sort((a, b) => a - b);
-console.log(sortedArr);
-
-
-
-
-
-// 8)გაამრავლე ყველა ელემენტი 2-ზე და დატოვე მხოლოდ ისინი, რომლებიც 5-ზე მეტია.
-
-let numsArr2 = [1, -1, -2, -10, 111, 3, 2, 5];
-let resultArr = numsArr2
-    .map((num) => num * 2)
-    .filter((num) => num > 5);
-console.log(resultArr);
-
-
-
-
-// 9)let arr = [1,1,1,1,2,2,3,3,3] დააბრუნე let unque = [1,2,3]
-let arr4 = [1, 1, 1, 1, 2, 2, 3, 3, 3];
-// let unique = [...new Set(arr4)];
-// console.log(unique);
-let unique = [];
-arr4.forEach(element => {
-    if (!unique.includes(element)) {
-        unique.push(element);
+// 2)შექმენი ობიექტი, რომელსაც ექნება width, height და getArea() მეთოდი, რომელიც დააბრუნებს ფართობს.
+const rectangle = {
+    width: 10,
+    height: 5,
+    getArea: function () {
+        return this.width * this.height;
     }
+};
 
-});
-console.log(unique);
+console.log("Area of rectangle:", rectangle.getArea());
 
 
 
-// 10), დააბრუნეთ ორი ყველაზე მცირე რიცხვის ჯამს let arr = [-1,20,90,4,5,111]
-let arr5 = [-1, 20, 90, 4, 5, 111];
-arr5.sort((a, b) => a - b);
-let sumOfTwoSmallest = arr5[0] + arr5[1];
-console.log(sumOfTwoSmallest);
+// 3)დაბეჭდე მხოლოდ იმ სტუდენტების სახელები, რომელთაც passed === true.
+const students = [
+    { name: "Giorgi", score: 85, passed: true },
+    { name: "Nika", score: 50, passed: false },
+    { name: "Mariam", score: 92, passed: true },
+    { name: "Luka", score: 60, passed: false }
+];
+for (let i = 0; i < students.length; i++) {
+    if (students[i].passed) {
+        console.log(students[i].name);
+    }
+};
 
+
+
+// 4)გაფილტრე ისეთი პროდუქტები, რომლებიც 10$-ზე იაფია და დააბრუნე მხოლოდ მათი სათაურების მასივი.
+const products = [
+    { title: "Pencil", price: 2 },
+    { title: "Notebook", price: 5 },
+    { title: "Backpack", price: 35 },
+    { title: "Ruler", price: 3 },
+    { title: "Calculator", price: 40 }
+];
+const newProducts = products
+    .filter(product => product.price < 10)
+    .map(product => product.title);
+console.log(newProducts);
+
+
+// 5)დაალაგე ზრდადობით rating-ის მიხედვით
+const movies = [
+    { title: "Inception", rating: 9 },
+    { title: "Avatar", rating: 7.5 },
+    { title: "Joker", rating: 8.2 },
+    { title: "Tenet", rating: 6.9 }
+];
+movies.sort((a, b) => a.rating - b.rating);
+console.log(movies);
+
+// 6)იპოვე ყველაზე იაფი ტელეფონი და გამოიტანე მხოლოდ მისი model
+const phones = [
+    { model: "iPhone 15", price: 1200 },
+    { model: "Samsung Galaxy S24", price: 950 },
+    { model: "Xiaomi Redmi 13", price: 250 },
+    { model: "Pixel 8", price: 800 }
+];
+
+let cheapestPhone = phones[0];
+for (let i = 1; i < phones.length; i++) {
+    if (phones[i].price < cheapestPhone.price) {
+        cheapestPhone = phones[i];
+    }
+};
+console.log("Cheapest phone model:", cheapestPhone.model);
+
+// 7)დაბეჭდე 300- გვერდიანზე მეტი
+const books = [
+    { title: "Harry Potter", pages: 500 },
+    { title: "The Little Prince", pages: 120 },
+    { title: "Lord of the Rings", pages: 700 },
+    { title: "Animal Farm", pages: 250 },
+];
+for (let i = 0; i < books.length; i++) {
+    if (books[i].pages > 300) {
+        console.log(books[i].title);
+    }
+};
+
+
+// 8)დაალაგე ზრდადობით და შეკრიბე ფასი
+
+const phones2 = [
+    { model: "iPhone 15", price: 1200 },
+    { model: "Samsung Galaxy S24", price: 950 },
+    { model: "Xiaomi Redmi 13", price: 250 },
+    { model: "Pixel 8", price: 800 }
+];
+phones2.sort((a, b) => a.price - b.price);
+let totalPrice = 0;
+for (let i = 0; i < phones2.length; i++) {
+    totalPrice += phones2[i].price;
+};
+console.log("Total price of all phones:", totalPrice);
