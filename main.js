@@ -1,115 +1,115 @@
-//  1) გაქვს ლეპტოპების მასივი, იპოვე ყველაზე ძვირი და გამოიტანე კონსოლში
+// 1. დაწერე ფუნქცია , რომელიც არგუმენტად იღებს sec-ს და ითვლის უკუსვლით იქმადე სანამ 0-მდე არ მივა
 
-const laptops = [
-    { model: "Dell XPS 13", price: 1800 },
-    { model: "MacBook Pro 14", price: 2499 },
-    { model: "Lenovo ThinkPad X1", price: 2100 },
-    { model: "Asus Zephyrus G14", price: 1999 },
-];
-let mostExpensiveLaptop = laptops[0];
+// function timer(sec) {
+//   let initialValue = 10;
+//   let interval = setInterval(() => {
+//     console.log(initialValue);
+//     initialValue--;
+//     if (initialValue < 6) {
+//       clearInterval(interval);
+//     }
+//   }, 1000);
+//   console.log(sec);
+// }
+// timer(5);
 
-for (let i = 1; i < laptops.length; i++) {
-    if (laptops[i].price > mostExpensiveLaptop.price) {
-        mostExpensiveLaptop = laptops[i];
-    }
-}
-console.log("Most expensive laptop:", mostExpensiveLaptop);
+// 2. დაწერე ფუქნცია ფუქნციას გადააწოდე რიცხვი  და ასევე ლოგე რენდომული რიცხვი იქამდე სანამ ეს გადაცემული და რენდომ რიცხვი არ. დაემთხვევა ერთმამენთს
 
+// function randomComparer(n) {
+//   let interval = setInterval(() => {
+//     let random = Math.floor(Math.random() * 15);
+//     console.log(random);
+//     if (n === random) {
+//       clearInterval(interval);
+//       console.log("gacherda");
+//     }
+//   });
+// }
+// randomComparer(5);
 
+// 3.და წერე ფუქნცია რომელიც მიიღებს n და callback-ს როცა n > 27-ზე გაუშვი ეს callback-ი რომელიც დააკონსოლებს რომ ეს ნამდვილად მეტია 27-ზე სხვა შემთხვევაში დააკონსოლე რომ n ნაკლებია
 
-// 2)შექმენი ობიექტი, რომელსაც ექნება width, height და getArea() მეთოდი, რომელიც დააბრუნებს ფართობს.
-const rectangle = {
-    width: 10,
-    height: 5,
-    getArea: function () {
-        return this.width * this.height;
-    }
-};
+// function test(n, callback) {
+//   if (n > 27) {
+//     callback();
+//   } else {
+//     console.log("ar aris meti");
+//   }
+// }
+// function callbackFnc() {
+//   console.log("metia 27-ze");
+// }
+// test(30, callbackFnc);
 
-console.log("Area of rectangle:", rectangle.getArea());
+// 4.დაწერე ფუქნცია რომელიც პარამეტრად მიიღებს API და დააბრუნებს ამ API-ში მყოფ  4 - users. https://jsonplaceholder.typicode.com/users დაწერე ორივენაირად than/catch & async/await
 
+// async function fetcjAPI(API) {
+//   let res = await fetch(API);
+//   let data = await res.json();
+//   let slicedData = data.slice(0, -6);
+//   console.log(slicedData);
+// }
+// fetcjAPI("https://jsonplaceholder.typicode.com/users");
 
+// 5) დააწყვილე reduce-თი ცალკე ვისი ასაკიც მეტია 10 ზე და ვისი ასაკიც ნაკლებია 20
+// let people = [
+//   { name: "Giorgi", age: 25 },
+//   { name: "Nika", age: 15 },
+//   { name: "Mariam", age: 30 },
+//   { name: "Luka", age: 18 },
+// ];
 
-// 3)დაბეჭდე მხოლოდ იმ სტუდენტების სახელები, რომელთაც passed === true.
-const students = [
-    { name: "Giorgi", score: 85, passed: true },
-    { name: "Nika", score: 50, passed: false },
-    { name: "Mariam", score: 92, passed: true },
-    { name: "Luka", score: 60, passed: false }
-];
-for (let i = 0; i < students.length; i++) {
-    if (students[i].passed) {
-        console.log(students[i].name);
-    }
-};
+// let grouped = people.reduce(
+//   (tot, curr) => {
+//     let age = curr.age;
+//     if (age > 10) tot.moreThanTen++;
+//     if (age < 20) tot.lessThanTwenty++;
+//     return tot;
+//   },
+//   { moreThanTen: 0, lessThanTwenty: 0 }
+// );
+// console.log(grouped);
 
+// 6. დაწერე ფუნქცია რომელიც მიიღებს ორ რიცხვს და callback-ს. თუ პირველი მეტია მეორეზე გაუშვი callback და დაუბეჭდე "მეტია", სხვა შემთხვევაში "ნაკლები ან ტოლია".
 
+// function compareNumbers(a, b, callback) {
+//     if (a > b) {
+//         callback();
+//     } else {
+//         callback();
+//     }
+// }
 
-// 4)გაფილტრე ისეთი პროდუქტები, რომლებიც 10$-ზე იაფია და დააბრუნე მხოლოდ მათი სათაურების მასივი.
-const products = [
-    { title: "Pencil", price: 2 },
-    { title: "Notebook", price: 5 },
-    { title: "Backpack", price: 35 },
-    { title: "Ruler", price: 3 },
-    { title: "Calculator", price: 40 }
-];
-const newProducts = products
-    .filter(product => product.price < 10)
-    .map(product => product.title);
-console.log(newProducts);
-
-
-// 5)დაალაგე ზრდადობით rating-ის მიხედვით
-const movies = [
-    { title: "Inception", rating: 9 },
-    { title: "Avatar", rating: 7.5 },
-    { title: "Joker", rating: 8.2 },
-    { title: "Tenet", rating: 6.9 }
-];
-movies.sort((a, b) => a.rating - b.rating);
-console.log(movies);
-
-// 6)იპოვე ყველაზე იაფი ტელეფონი და გამოიტანე მხოლოდ მისი model
-const phones = [
-    { model: "iPhone 15", price: 1200 },
-    { model: "Samsung Galaxy S24", price: 950 },
-    { model: "Xiaomi Redmi 13", price: 250 },
-    { model: "Pixel 8", price: 800 }
-];
-
-let cheapestPhone = phones[0];
-for (let i = 1; i < phones.length; i++) {
-    if (phones[i].price < cheapestPhone.price) {
-        cheapestPhone = phones[i];
-    }
-};
-console.log("Cheapest phone model:", cheapestPhone.model);
-
-// 7)დაბეჭდე 300- გვერდიანზე მეტი
-const books = [
-    { title: "Harry Potter", pages: 500 },
-    { title: "The Little Prince", pages: 120 },
-    { title: "Lord of the Rings", pages: 700 },
-    { title: "Animal Farm", pages: 250 },
-];
-for (let i = 0; i < books.length; i++) {
-    if (books[i].pages > 300) {
-        console.log(books[i].title);
-    }
-};
+// compareNumbers(10, 5, () => {
+//     console.log("მეტია");
+// });
 
 
-// 8)დაალაგე ზრდადობით და შეკრიბე ფასი
+// compareNumbers(3, 8, () => {
+//     console.log("ნაკლებია ან ტოლია");
+// });
 
-const phones2 = [
-    { model: "iPhone 15", price: 1200 },
-    { model: "Samsung Galaxy S24", price: 950 },
-    { model: "Xiaomi Redmi 13", price: 250 },
-    { model: "Pixel 8", price: 800 }
-];
-phones2.sort((a, b) => a.price - b.price);
-let totalPrice = 0;
-for (let i = 0; i < phones2.length; i++) {
-    totalPrice += phones2[i].price;
-};
-console.log("Total price of all phones:", totalPrice);
+// 7.დაწერე reduce, რომელიც დააჯგუფებს - ცალკე 20-ზე მეტ ფასიან რიცხვებს და
+// ცალკე 20-ზე ნაკლები ან ტოლი ფასიანი ნივთები
+
+// let products = [
+//     { name: "Mouse", price: 15 },
+//     { name: "Keyboard", price: 45 },
+//     { name: "USB Cable", price: 7 },
+//     { name: "Headphones", price: 29.9 },
+//     { name: "Webcam", price: 52 },
+// ];
+// let answer = products.reduce(
+//     (acc, curr) => {
+//         if (curr.price > 20) {
+//             acc.moreThan20.push(curr);
+//         } else {
+//             acc.lessOrEqual20.push(curr);
+//         }
+//         return acc;
+//     },
+//     { moreThan20: [], lessOrEqual20: [] }
+// );
+
+// console.log("20-ზე მეტი:", answer.moreThan20);
+// console.log("20-ზე ნაკლები ან ტოლი:", answer.lessOrEqual20);
