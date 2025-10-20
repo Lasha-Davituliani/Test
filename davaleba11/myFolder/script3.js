@@ -1,0 +1,1 @@
+Content of script3.js
