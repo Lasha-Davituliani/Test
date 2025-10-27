@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Chocolate Milk",
+    "description": "Fresh milk",
+    "date": "2025-12-01",
+    "category": "Dairy",
+    "isExpired": false
+  },
+  {
+    "id": 2,
+    "name": "Milk",
+    "description": "Fresh milk",
+    "date": "2025-12-01",
+    "category": "Dairy",
+    "isExpired": false
+  },
+  {
+    "id": 3,
+    "name": "Milk",
+    "description": "Fresh milk",
+    "date": "2024-12-01",
+    "category": "Dairy",
+    "isExpired": true
+  }
+]
