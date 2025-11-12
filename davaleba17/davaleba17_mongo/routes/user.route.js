@@ -11,7 +11,7 @@ usersRouter.get("/", async (req, res) => {
 usersRouter.post("/", async (req, res) => {
   const { name, age } = req.body;
   const createUser = await userModel.create({ name, age });
-  console.log(`User ${createUser.name} is ${createUser.age} years old.`);
+  console.log(`User ${name} is ${age} years old.`);
   res.json({ massage: "user is created successesfully", data: createUser });
 });
 module.exports = usersRouter;
