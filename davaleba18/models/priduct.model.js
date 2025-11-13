@@ -7,6 +7,8 @@ const productSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
+      min: [2],
+      max: [4000],
     },
     category: {
       type: String,

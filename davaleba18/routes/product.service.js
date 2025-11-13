@@ -6,6 +6,38 @@ const findAllProducts = async (req, res) => {
   res.json(findAllProducts);
 };
 
+const paginatedProducts = async (req, res) => {
+  try {
+    let { page = 1, limit = 5 } = req.query;
+
+    page = parseInt(page);
+    limit = parseInt(limit);
+
+    // მაქსიმუმ 5 ჩანაწერი ერთ გვერდზე
+    if (limit > 5) limit = 5;
+
+    const skip = (page - 1) * limit;
+
+    const [products, total] = await Promise.all([
+      productModel.find().skip(skip).limit(limit),
+      productModel.countDocuments(),
+    ]);
+
+    res.json({
+      message: "success",
+      data: products,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 const findProductById = async (req, res) => {
   const { id } = req.params;
   if (!isValidObjectId(id)) {
@@ -25,6 +57,13 @@ const createProduct = async (req, res) => {
       data: null,
     });
   }
+  if (price < 2 || price > 4000) {
+    return res.status(400).json({
+      massage: "The product price must be at least 2 and at most 4000",
+      data: `your input price ${price}`,
+    });
+  }
+
   const createProduct = await productModel.create({
     name,
     price,
@@ -59,6 +98,7 @@ const updateProduct = async (req, res) => {
 };
 module.exports = {
   findAllProducts,
+  paginatedProducts,
   findProductById,
   createProduct,
   deleteProduct,

@@ -1,10 +1,9 @@
 const { default: mongoose } = require("mongoose");
+require("dotenv").config();
 
 module.exports = async () => {
   try {
-    await mongoose.connect(
-      "mongodb+srv://admin:Admin123!@cluster1.jck1a59.mongodb.net/?appName=Cluster1"
-    );
+    await mongoose.connect(process.env.MONGO_URI);
     console.log("connected successfully");
   } catch (error) {
     console.log(error, "cound not connect mongoDb");
