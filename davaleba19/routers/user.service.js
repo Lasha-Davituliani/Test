@@ -12,7 +12,10 @@ const findUserById = async (req, res) => {
       .status(404)
       .json({ massage: "not found(invalid id)", data: null });
   }
-  const findById = await userModel.findById(id).select("-password");
+  const findById = await userModel
+    .findById(id)
+    .select("-password")
+    .populate({ path: "expenses", options: { sort: { createdAt: -1 } } });
   res.json({ massage: "Successfully", data: findById });
 };
 const deleteUser = async (req, res) => {

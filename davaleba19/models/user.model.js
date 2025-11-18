@@ -10,9 +10,9 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
     },
-    posts: {
+    expenses: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "posts",
+      ref: "expense",
       default: [],
     },
   },
