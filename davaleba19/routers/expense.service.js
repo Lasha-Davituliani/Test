@@ -61,7 +61,9 @@ const findExpenseById = async (req, res) => {
       return res.status(400).json({ message: "invalid id", data: null });
     }
 
-    const findById = await expenseModel.findOne({ _id: id, user: userId });
+    const findById = await expenseModel
+      .findOne({ _id: id, user: userId })
+      .populate("user", "-password");
     if (!findById) {
       return res.status(404).json({ message: "Expense not found", data: null });
     }
@@ -112,7 +114,7 @@ const updateExpense = async (req, res) => {
     }
 
     const updatedExpense = await expenseModel.findOneAndUpdate(
-      { _id: id, user: userId }, // FIX: Use object with user filter
+      { _id: id, user: userId },
       { amount, category, description },
       { new: true }
     );

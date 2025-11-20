@@ -7,7 +7,8 @@ function getToken(headers) {
 }
 async function isAuth(req, res, next) {
   const token = getToken(req.headers);
-  return res.status(401).json({ message: "permision denide!", data: null });
+  if (!token)
+    return res.status(401).json({ message: "permision denide!", data: null });
   try {
     const payLoad = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = payLoad.userId;
