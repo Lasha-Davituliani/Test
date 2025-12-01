@@ -10,6 +10,7 @@ import { UserAgentMiddleware } from 'middlewares/userAgent.middleware';
 import { HasTokenMiddleware } from 'middlewares/hasTokenMiddleware';
 import { roleMiddleware } from 'middlewares/roleMiddleware';
 import path from 'path';
+import { BlockBrowserMiddleware } from 'middlewares/blockBrowser.middleware';
 
 @Module({
   controllers: [ProductsController],
@@ -18,8 +19,8 @@ import path from 'path';
 export class ProductsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(UserAgentMiddleware)
-      .forRoutes({ path: 'products', method: RequestMethod.GET });
+      .apply(BlockBrowserMiddleware)
+      .forRoutes({ path: 'products', method: RequestMethod.ALL });
 
     consumer
       .apply(HasTokenMiddleware)
