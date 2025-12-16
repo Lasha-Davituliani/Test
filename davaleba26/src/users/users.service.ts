@@ -22,7 +22,12 @@ export class UsersService {
     return createdUser.save();
   }
   findAll() {
-    return this.userModel.find().populate({ path: 'posts', select: '-user' });
+    // return this.userModel
+    //   .find({ age: { $eq: 33 } })
+    //   .populate({ path: 'posts', select: '-user' });
+    return this.userModel
+      .find({ firstName: { $regex: /^m/ } })
+      .populate({ path: 'posts', select: '-user' });
   }
 
   async findOne(id: string) {
