@@ -7,15 +7,24 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { isValidObjectId, Model } from 'mongoose';
+import { User } from 'src/users/schema/user.schema';
 
 @Injectable()
 export class PostsService {
-  constructor(@InjectModel('post') private postModel: Model<any>) {}
+  constructor(
+    @InjectModel('post') private postModel: Model<any>,
+    @InjectModel('user') private userModel: Model<User>,
+  ) {}
 
   async create(userId: string, createPostDto: CreatePostDto) {
+    const user = await this.userModel.findById(userId);
+    if (!user) throw new NotFoundException();
     const newPost = await this.postModel.create({
       ...createPostDto,
-      user: userId,
+      user: user._id,
+    });
+    await this.userModel.findByIdAndUpdate(user._id, {
+      $push: { posts: newPost._id },
     });
     return newPost;
   }

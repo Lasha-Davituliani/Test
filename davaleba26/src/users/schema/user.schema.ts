@@ -16,6 +16,9 @@ export class User {
 
   @Prop({ type: Number })
   age: number;
+
+  @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: 'post', default: [] })
+  posts: mongoose.Schema.Types.ObjectId;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

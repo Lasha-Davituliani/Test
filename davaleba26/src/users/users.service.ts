@@ -22,7 +22,7 @@ export class UsersService {
     return createdUser.save();
   }
   findAll() {
-    return this.userModel.find();
+    return this.userModel.find().populate({ path: 'posts', select: '-user' });
   }
 
   async findOne(id: string) {
@@ -48,5 +48,15 @@ export class UsersService {
     const deleteUser = await this.userModel.findByIdAndDelete(id);
     if (!deleteUser) throw new NotFoundException('not found');
     return deleteUser;
+  }
+
+  async addPostToUser(userId: string, postId: string) {
+    const updatedUser = await this.userModel.findByIdAndUpdate(
+      userId,
+      { $push: { posts: postId } },
+      { new: true },
+    );
+    if (!updatedUser) throw new NotFoundException('User not found');
+    return updatedUser;
   }
 }
