@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './schema/user.schema';
 import { Model } from 'mongoose';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -15,7 +16,7 @@ export class UsersService {
   }
 
   findAll() {
-    return this.userModel.find();
+    return this.userModel.find().populate('posts');
   }
 
   async findByEmail(email: string) {
@@ -26,11 +27,14 @@ export class UsersService {
   }
 
   async findOne(id: string) {
-    const findUserById = await this.userModel.findById(id);
+    const findUserById = await this.userModel.findById(id).populate('posts');
     return findUserById;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
+    if (updateUserDto.password) {
+      updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
+    }
     const updatedUser = await this.userModel.findByIdAndUpdate(
       id,
       updateUserDto,
@@ -42,5 +46,13 @@ export class UsersService {
   async remove(id: string) {
     const deletedUser = await this.userModel.findByIdAndDelete(id);
     return deletedUser;
+  }
+  async addPost(postId, userId) {
+    const updatedUser = await this.userModel.findByIdAndUpdate(
+      userId,
+      { $push: { posts: postId } },
+      { new: true },
+    );
+    return updatedUser;
   }
 }

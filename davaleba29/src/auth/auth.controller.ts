@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { SignUpDto } from './DTO/sign-up.dto';
 import { SignInDto } from './DTO/sign-in.dto';
 import { AuthGuard } from './guards/auth.guard';
+import { User } from 'src/decorators/user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -19,8 +20,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Get('current-user')
-  currentUser(@Req() request) {
-    const userId = request.userId;
+  currentUser(@User() userId) {
     const user = this.authService.currentUser(userId);
     return user;
   }

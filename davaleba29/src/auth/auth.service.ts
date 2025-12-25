@@ -4,6 +4,8 @@ import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { SignInDto } from './DTO/sign-in.dto';
 import { JwtService } from '@nestjs/jwt';
+import { rootCertificates } from 'tls';
+import e from 'express';
 @Injectable()
 export class AuthService {
   constructor(
@@ -33,7 +35,8 @@ export class AuthService {
       throw new BadGatewayException('Invalid credentials provided');
 
     const payload = {
-      userId: exsistingUser?._id,
+      userId: exsistingUser._id,
+      role: exsistingUser.role,
     };
     const token = this.jwtService.sign(payload, { expiresIn: '1h' });
     return { token };
