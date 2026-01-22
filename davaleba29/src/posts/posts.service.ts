@@ -1,7 +1,7 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import { Model } from 'mongoose';
+import { isValidObjectId, Model } from 'mongoose';
 import { Post } from './schema/post.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { UsersService } from 'src/users/users.service';
@@ -27,6 +27,7 @@ export class PostsService {
   }
 
   async findOne(id: string) {
+    if(!isValidObjectId(id)){throw new BadRequestException('Invalid post ID');}
     const post = await this.postModel.findById(id);
     if (!post) {
       throw new Error('User not found');
