@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Model } from 'mongoose';
@@ -10,6 +10,7 @@ import { UsersService } from 'src/users/users.service';
 export class PostsService {
   constructor(
     @InjectModel('post') private postModel: Model<any>,
+    @Inject(forwardRef(() => UsersService))
     private usersService: UsersService,
   ) {}
   async create(userId, createPostDto: CreatePostDto) {
@@ -51,5 +52,9 @@ export class PostsService {
       throw new Error('User not found');
     }
     return deletedPost;
+  }
+
+  async postByUserId(id) {
+    await this.postModel.deleteMany({ user: id });
   }
 }
