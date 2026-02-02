@@ -1,0 +1,1 @@
+[{"name":"Gio","score":75,"passed":true},{"name":"Nika","score":45,"passed":false},{"name":"Mariam","score":85,"passed":true},{"name":"Lasha","score":30,"passed":false}]
